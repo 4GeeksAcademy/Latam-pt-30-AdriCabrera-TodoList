@@ -13,19 +13,21 @@ const Home = () => {
 			<h1>todos</h1>
 			<ul>
 				<li>
-					<input type="text" placeholder="New task"
+					<input type="text" placeholder="Add new task"
 						onChange={e => setInputValue(e.target.value)}
 						value={inputValue}
 						onKeyDown={event => {
 							if (event.key === "Enter") {
-								setTodoList(todoList.concat(inputValue))
-								setInputValue("")
+								if (inputValue.trim() !== "") {
+									setTodoList(todoList.concat([inputValue.trim()]))
+									setInputValue("")
+								}
 							}
 						}}
 					></input>
 				</li>
 				{todoList.map((todo, index) => {
-					return <li>{todo} {" "}
+					return <li key={index}>{todo} {" "}
 						<i className="delete fa fa-xmark"
 							onClick={() =>
 								setTodoList(
