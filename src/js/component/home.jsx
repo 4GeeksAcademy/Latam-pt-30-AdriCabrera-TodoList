@@ -13,7 +13,7 @@ const Home = () => {
 			<h1>todos</h1>
 			<ul>
 				<li>
-					<input type="text" placeholder="Add new task"
+					<input type="text" placeholder="Agrega una tarea"
 						onChange={e => setInputValue(e.target.value)}
 						value={inputValue}
 						onKeyDown={event => {
@@ -26,24 +26,27 @@ const Home = () => {
 						}}
 					></input>
 				</li>
-				{todoList.map((todo, index) => {
-					return <li key={index}>{todo} {" "}
-						<i className="delete fa fa-xmark"
-							onClick={() =>
-								setTodoList(
-									todoList.filter(
-										(todo, currentIndex) =>
-											index != currentIndex
+				{todoList.length === 0 ? (
+					<li className="noTasks fst-italic fw-light">No hay tareas, añadir tareas</li>
+				) : (
+					todoList.map((todo, index) => (
+						<li key={index}>
+							{todo} {" "}
+							<i
+								className="delete fa fa-xmark"
+								onClick={() =>
+									setTodoList(
+										todoList.filter(
+											(todo, currentIndex) => index != currentIndex
+										)
 									)
-								)
-							}></i>
-					</li>
-				})
-				}
+								}
+							></i>
+						</li>
+					))
+				)}
 			</ul>
-			<div>
-				{todoList.length} Items left
-			</div>
+			<div>{todoList.length} Items left</div>
 		</div>
 	);
 };
